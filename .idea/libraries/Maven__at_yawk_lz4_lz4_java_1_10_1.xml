@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: at.yawk.lz4:lz4-java:1.10.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/at/yawk/lz4/lz4-java/1.10.1/lz4-java-1.10.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
