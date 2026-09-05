@@ -10,19 +10,19 @@ spring:
     gateway:
       routes:
         - id: auth-service-route
-          uri: http://localhost:7070
+          uri: http://auth:7070
           predicates:
-            - Path=/api/auth/**
+            - Path=/api/auth/**, /api/v1/**
 
         - id: patient-service
-          uri: http://localhost:4000
+          uri: http://patient:4000
           predicates:
             - Path=/api/patients/**
           filters:
             - JwtValidation
 
         - id: billing-service
-          uri: http://localhost:4009
+          uri: http://billing:4009
           predicates:
             - Path=/api/billing/**
           filters:
