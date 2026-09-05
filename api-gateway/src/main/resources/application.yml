@@ -1,20 +1,3 @@
-server:
-  port: 8080
-
 spring:
-  cloud:
-    gateway:
-      routes:
-        - id: patient-service
-          uri: http://patient:4000
-          predicates:
-            - Path=/api/patients/**
-#          filters:
-#            - StripPrefix=1
-
-        - id: billing-service
-          uri: http://billing:4009
-          predicates:
-            - Path=/api/billing/**
-          filters:
-            - StripPrefix=2
+  profiles:
+    active: local

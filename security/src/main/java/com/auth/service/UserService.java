@@ -19,7 +19,9 @@ public class UserService {
     public User saveUser(UserDto dto) {
         try {
             Optional<User> byUsername = userRepository.findByUsername(dto.getUsername());
-            if (byUsername.isPresent()) throw new RuntimeException("User already exists");
+            if (byUsername.isPresent()){
+                throw new RuntimeException("User already exists");
+            }
             User user = User.builder().username(dto.getUsername())
                     .password(passwordEncoder.encode(dto.getPassword()))
                     .role(dto.getRoles()).build();

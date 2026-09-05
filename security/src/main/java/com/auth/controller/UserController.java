@@ -17,8 +17,11 @@ public class UserController {
     @PostMapping("/saveuser")
     public ResponseEntity<?> saveUser(@RequestBody UserDto userDto){
         User user = userService.saveUser(userDto);
-        System.out.println(user.toString());
-        return ResponseEntity.ok(user);
+        if(user!=null){
+            return ResponseEntity.ok(user);
+        }else{
+            return ResponseEntity.badRequest().body("User already exists");
+        }
     }
 
     @GetMapping("/all")

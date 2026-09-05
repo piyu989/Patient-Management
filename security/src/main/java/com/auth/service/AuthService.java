@@ -27,4 +27,11 @@ public class AuthService {
 
         return new JwtAuthResponse(token, refreshToken, "Bearer");
     }
+
+    public boolean validateToken(String token) {
+        String jwtToken = token.replace("Bearer ", "");
+        String username = jwtUtils.extractUsername(jwtToken);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        return jwtUtils.isTokenValid(jwtToken, userDetails);
+    }
 }
