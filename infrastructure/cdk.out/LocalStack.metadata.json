@@ -1,0 +1,609 @@
+{
+  "/LocalStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MySqlHealthCheck": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MySqlHealthCheck"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MsSqlHealthCheck": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MsSqlHealthCheck"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaFargateService": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "Enable the 'circuitBreaker' property to trigger a quicker deployment failure if tasks are failing to come start (without this setting deployments may take up to 3 hours to fail). [ack: @aws-cdk/aws-ecs:shouldUseCircuitBreaker]",
+      "trace": [
+        "Annotations.addMessage (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new BaseService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ecs\\lib\\base\\base-service.js:1:14671)",
+        "new BaseService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\no-box-stack-traces.js:1:345)",
+        "new FargateService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ecs\\lib\\fargate\\fargate-service.js:1:7829)",
+        "new FargateService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Kernel._Kernel_create (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:62561)",
+        "Kernel.create (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:53295)",
+        "KernelHost.processRequest (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:228024)",
+        "KernelHost.run (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:227008)",
+        "Immediate._onImmediate (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:227052)",
+        "process.processImmediate (node:internal/timers:574:21)"
+      ]
+    },
+    {
+      "type": "aws:cdk:warning",
+      "data": "minHealthyPercent has not been configured so the default value of 50% is used. The number of running tasks will decrease below the desired count during deployments etc. See https://github.com/aws/aws-cdk/issues/31705 [ack: @aws-cdk/aws-ecs:minHealthyPercent]",
+      "trace": [
+        "Annotations.addMessage (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new BaseService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ecs\\lib\\base\\base-service.js:1:16295)",
+        "new BaseService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\no-box-stack-traces.js:1:345)",
+        "new FargateService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ecs\\lib\\fargate\\fargate-service.js:1:7829)",
+        "new FargateService2 (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Kernel._Kernel_create (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:62561)",
+        "Kernel.create (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:53295)",
+        "KernelHost.processRequest (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:228024)",
+        "KernelHost.run (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:227008)",
+        "Immediate._onImmediate (C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-java-runtime3519321965744277628\\lib\\program.js:1:227052)",
+        "process.processImmediate (node:internal/timers:574:21)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaHealthCheck": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaHealthCheck"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPC522067E7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCIGWA0746919"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCVPCGW1FFEFAEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MySqlSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MySqlSecurityGroup63FD8C2A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MySqlInstance/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MySqlInstance2CFB48F1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MsSqlSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MsSqlSecurityGroupA01189B0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MsSqlInstance/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MsSqlInstance38A5B688"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaCluster/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaCluster844F6CC9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaSecurityGroup4BEFFE40"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaTaskDef/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaTaskDefBC2EEF2D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaFargateService/Service": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaFargateServiceE80C3675"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementCluster/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementCluster98E10F8D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet1SubnetC8305E9D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet1RouteTableA48D3D3E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet1RouteTableAssociationA39A24A4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet1DefaultRoute1E407ABB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:208 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib, jsii runtime..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet1EIPC113BD7F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet1NATGatewayB9CF9F92"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet2Subnet07CEC558"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet2RouteTable391C4D34"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet2RouteTableAssociationCAC8BA09"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet2DefaultRoute2DC1F916"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:208 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib, jsii runtime..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet2/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet2EIP208E0C4A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PublicSubnet2/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPublicSubnet2NATGateway28B0784D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet1Subnet05B10E79"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet1RouteTableE0FA4385"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet1RouteTableAssociationAA604973"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet1DefaultRouteC24DADA9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet2Subnet8A2E409C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet2RouteTableBC0C3BB6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet2RouteTableAssociationC55EBEF2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\Users\\sab98\\AppData\\Local\\Temp\\jsii-kernel-lJ5V40\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:270 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementVPC/PrivateSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementVPCPrivateSubnet2DefaultRoute98121A2D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MySqlInstance/SubnetGroup/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MySqlInstanceSubnetGroup5B1A5D60"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/MsSqlInstance/SubnetGroup/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "MsSqlInstanceSubnetGroup472B9D2B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaTaskDef/TaskRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaTaskDefTaskRole74EBB24D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaTaskDef/ExecutionRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaTaskDefExecutionRole7CC5A0C7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/PatientManagementCluster/DefaultServiceDiscoveryNamespace/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PatientManagementClusterDefaultServiceDiscoveryNamespace72C5F264"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaTaskDef/KafkaContainer/LogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaTaskDefKafkaContainerLogGroup9CD40675"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, jsii runtime...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/LocalStack/KafkaTaskDef/ExecutionRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "KafkaTaskDefExecutionRoleDefaultPolicy6686E169"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ]
+}

@@ -11,11 +11,6 @@
         <module name="billing" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="analytic" target="18" />
-      <module name="billing" target="18" />
-      <module name="demo" target="18" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
