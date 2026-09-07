@@ -570,16 +570,10 @@
     }
    }
   },
-  "KafkaCluster844F6CC9": {
-   "Type": "AWS::ECS::Cluster",
-   "Properties": {
-    "ClusterName": "KafkaCluster"
-   }
-  },
   "KafkaSecurityGroup4BEFFE40": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
-    "GroupDescription": "Allow Kafka inbound traffic",
+    "GroupDescription": "Allow Kafka broker access from ECS microservices",
     "SecurityGroupEgress": [
      {
       "CidrIp": "0.0.0.0/0",
@@ -595,7 +589,7 @@
         "CidrBlock"
        ]
       },
-      "Description": "Allow Kafka Plaintext from VPC",
+      "Description": "Plaintext traffic from VPC",
       "FromPort": 9092,
       "IpProtocol": "tcp",
       "ToPort": 9092
@@ -607,10 +601,10 @@
         "CidrBlock"
        ]
       },
-      "Description": "Allow Kafka Internal from VPC",
-      "FromPort": 29092,
+      "Description": "TLS traffic from VPC",
+      "FromPort": 9094,
       "IpProtocol": "tcp",
-      "ToPort": 29092
+      "ToPort": 9094
      }
     ],
     "VpcId": {
@@ -618,262 +612,31 @@
     }
    }
   },
-  "KafkaTaskDefTaskRole74EBB24D": {
-   "Type": "AWS::IAM::Role",
+  "MskCluster": {
+   "Type": "AWS::MSK::Cluster",
    "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
+    "BrokerNodeGroupInfo": {
+     "ClientSubnets": [
       {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "ecs-tasks.amazonaws.com"
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    }
-   }
-  },
-  "KafkaTaskDefBC2EEF2D": {
-   "Type": "AWS::ECS::TaskDefinition",
-   "Properties": {
-    "ContainerDefinitions": [
-     {
-      "Environment": [
-       {
-        "Name": "KAFKA_CONTROLLER_LISTENER_NAMES",
-        "Value": "CONTROLLER"
-       },
-       {
-        "Name": "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR",
-        "Value": "1"
-       },
-       {
-        "Name": "KAFKA_TRANSACTION_STATE_LOG_MIN_ISR",
-        "Value": "1"
-       },
-       {
-        "Name": "KAFKA_LISTENERS",
-        "Value": "PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:29093,PLAINTEXT_HOST://0.0.0.0:9092"
-       },
-       {
-        "Name": "KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR",
-        "Value": "1"
-       },
-       {
-        "Name": "KAFKA_PROCESS_ROLES",
-        "Value": "broker,controller"
-       },
-       {
-        "Name": "KAFKA_LOG_DIRS",
-        "Value": "/tmp/kraft-combined-logs"
-       },
-       {
-        "Name": "KAFKA_ADVERTISED_LISTENERS",
-        "Value": "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092"
-       },
-       {
-        "Name": "KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS",
-        "Value": "0"
-       },
-       {
-        "Name": "KAFKA_LISTENER_SECURITY_PROTOCOL_MAP",
-        "Value": "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
-       },
-       {
-        "Name": "CLUSTER_ID",
-        "Value": "MkU3OEVBNTcwNTJENDM2Qk"
-       },
-       {
-        "Name": "KAFKA_NODE_ID",
-        "Value": "1"
-       },
-       {
-        "Name": "KAFKA_CONTROLLER_QUORUM_VOTERS",
-        "Value": "1@kafka:29093"
-       },
-       {
-        "Name": "KAFKA_INTER_BROKER_LISTENER_NAME",
-        "Value": "PLAINTEXT"
-       },
-       {
-        "Name": "KAFKA_KEY_FORMATED",
-        "Value": "1"
-       }
-      ],
-      "Essential": true,
-      "Image": "confluentinc/cp-kafka:7.5.0",
-      "LogConfiguration": {
-       "LogDriver": "awslogs",
-       "Options": {
-        "awslogs-group": {
-         "Ref": "KafkaTaskDefKafkaContainerLogGroup9CD40675"
-        },
-        "awslogs-stream-prefix": "kafka",
-        "awslogs-region": {
-         "Ref": "AWS::Region"
-        }
-       }
+       "Ref": "PatientManagementVPCPrivateSubnet1Subnet05B10E79"
       },
-      "Name": "kafka",
-      "PortMappings": [
-       {
-        "ContainerPort": 9092,
-        "HostPort": 9092,
-        "Protocol": "tcp"
-       },
-       {
-        "ContainerPort": 29092,
-        "HostPort": 29092,
-        "Protocol": "tcp"
-       }
-      ]
-     }
-    ],
-    "Cpu": "1024",
-    "ExecutionRoleArn": {
-     "Fn::GetAtt": [
-      "KafkaTaskDefExecutionRole7CC5A0C7",
-      "Arn"
-     ]
-    },
-    "Family": "LocalStackKafkaTaskDef43C862A3",
-    "Memory": "2048",
-    "NetworkMode": "awsvpc",
-    "RequiresCompatibilities": [
-     "FARGATE"
-    ],
-    "TaskRoleArn": {
-     "Fn::GetAtt": [
-      "KafkaTaskDefTaskRole74EBB24D",
-      "Arn"
-     ]
-    }
-   }
-  },
-  "KafkaTaskDefKafkaContainerLogGroup9CD40675": {
-   "Type": "AWS::Logs::LogGroup",
-   "UpdateReplacePolicy": "Retain",
-   "DeletionPolicy": "Retain"
-  },
-  "KafkaTaskDefExecutionRole7CC5A0C7": {
-   "Type": "AWS::IAM::Role",
-   "Properties": {
-    "AssumeRolePolicyDocument": {
-     "Statement": [
       {
-       "Action": "sts:AssumeRole",
-       "Effect": "Allow",
-       "Principal": {
-        "Service": "ecs-tasks.amazonaws.com"
-       }
+       "Ref": "PatientManagementVPCPrivateSubnet2Subnet8A2E409C"
       }
      ],
-     "Version": "2012-10-17"
-    }
-   }
-  },
-  "KafkaTaskDefExecutionRoleDefaultPolicy6686E169": {
-   "Type": "AWS::IAM::Policy",
-   "Properties": {
-    "PolicyDocument": {
-     "Statement": [
+     "InstanceType": "kafka.t3.small",
+     "SecurityGroups": [
       {
-       "Action": [
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-       ],
-       "Effect": "Allow",
-       "Resource": {
-        "Fn::GetAtt": [
-         "KafkaTaskDefKafkaContainerLogGroup9CD40675",
-         "Arn"
-        ]
-       }
-      }
-     ],
-     "Version": "2012-10-17"
-    },
-    "PolicyName": "KafkaTaskDefExecutionRoleDefaultPolicy6686E169",
-    "Roles": [
-     {
-      "Ref": "KafkaTaskDefExecutionRole7CC5A0C7"
-     }
-    ]
-   }
-  },
-  "KafkaFargateServiceE80C3675": {
-   "Type": "AWS::ECS::Service",
-   "Properties": {
-    "Cluster": {
-     "Ref": "KafkaCluster844F6CC9"
-    },
-    "DeploymentConfiguration": {
-     "Alarms": {
-      "AlarmNames": [],
-      "Enable": false,
-      "Rollback": false
-     },
-     "MaximumPercent": 200,
-     "MinimumHealthyPercent": 50
-    },
-    "DesiredCount": 1,
-    "EnableECSManagedTags": false,
-    "LaunchType": "FARGATE",
-    "NetworkConfiguration": {
-     "AwsvpcConfiguration": {
-      "AssignPublicIp": "DISABLED",
-      "SecurityGroups": [
-       {
-        "Fn::GetAtt": [
-         "KafkaSecurityGroup4BEFFE40",
-         "GroupId"
-        ]
-       }
-      ],
-      "Subnets": [
-       {
-        "Ref": "PatientManagementVPCPrivateSubnet1Subnet05B10E79"
-       },
-       {
-        "Ref": "PatientManagementVPCPrivateSubnet2Subnet8A2E409C"
-       }
-      ]
-     }
-    },
-    "ServiceName": "kafka-service",
-    "TaskDefinition": {
-     "Ref": "KafkaTaskDefBC2EEF2D"
-    }
-   },
-   "DependsOn": [
-    "KafkaTaskDefTaskRole74EBB24D"
-   ]
-  },
-  "KafkaHealthCheck": {
-   "Type": "AWS::Route53::HealthCheck",
-   "Properties": {
-    "HealthCheckConfig": {
-     "FailureThreshold": 3,
-     "FullyQualifiedDomainName": {
-      "Fn::Join": [
-       "",
-       [
-        {
-         "Fn::GetAtt": [
-          "KafkaFargateServiceE80C3675",
-          "Name"
-         ]
-        },
-        ".local"
+       "Fn::GetAtt": [
+        "KafkaSecurityGroup4BEFFE40",
+        "GroupId"
        ]
-      ]
-     },
-     "Port": 9092,
-     "RequestInterval": 10,
-     "Type": "TCP"
-    }
+      }
+     ]
+    },
+    "ClusterName": "PatientManagementMSK",
+    "KafkaVersion": "3.5.1",
+    "NumberOfBrokerNodes": 2
    }
   },
   "PatientManagementCluster98E10F8D": {

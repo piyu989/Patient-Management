@@ -4,11 +4,16 @@ import software.amazon.awscdk.*;
 import software.amazon.awscdk.services.ec2.*;
 import software.amazon.awscdk.services.ec2.InstanceType;
 import software.amazon.awscdk.services.ecs.*;
+import software.amazon.awscdk.services.ecs.Protocol;
+import software.amazon.awscdk.services.logs.LogGroup;
+import software.amazon.awscdk.services.logs.RetentionDays;
+import software.amazon.awscdk.services.msk.CfnCluster;
 import software.amazon.awscdk.services.rds.*;
 import software.amazon.awscdk.services.ec2.Vpc;
 import software.amazon.awscdk.services.rds.DatabaseInstance;
 import software.amazon.awscdk.services.route53.CfnHealthCheck;
 import software.amazon.awscdk.services.route53.CfnHealthCheckProps;
+import software.amazon.awscdk.services.msk.*;
 
 import java.util.List;
 import java.util.Map;
@@ -27,10 +32,38 @@ public class LocalStack extends Stack
         DatabaseInstance mssqlInstance=createMsSqlInstance();
         CfnHealthCheck mySqlHealthCheck=createMySqlHealthCheck(mySqlInstance);
         CfnHealthCheck msSqlHealthCheck=createMsSqlHealthCheck(mssqlInstance);
-        FargateService kafkaService=createKafkaService();
-        CfnHealthCheck kafkaHealthCheck=createKafkaHealthCheck(kafkaService);
+        CfnCluster kafkaService=createMskCluster();
 
         this.ecsCluster = createEcsCluster();
+    }
+
+    private FargateService createFargateService(String id,String imageName,List<Integer>ports,
+                                                DatabaseInstance db,Map<String,String>envVars){
+        FargateTaskDefinition taskDefinition = FargateTaskDefinition.Builder.create(this, id + "TaskDef")
+                .cpu(254)
+                .memoryLimitMiB(512)
+                .build();
+
+        ContainerDefinitionOptions containerOptions = ContainerDefinitionOptions.builder()
+                .image(ContainerImage.fromRegistry(imageName))
+                .portMappings(ports.stream()
+                        .map(port -> PortMapping.builder()
+                                .containerPort(port)
+                                .hostPort(port)
+                                .protocol(Protocol.TCP)
+                                .build())
+                        .toList())
+                .logging(LogDriver.awsLogs(AwsLogDriverProps.builder()
+                        .logGroup(LogGroup.Builder.create(this, id + "LogGroup")
+                                .logGroupName("ecs/" + imageName)
+                                .removalPolicy(RemovalPolicy.DESTROY)
+                                .retention(RetentionDays.ONE_DAY)
+                                .build())
+//                        .streamPrefix(id + "Log")
+                        .build()))
+                .environment(envVars)
+                .build();
+
     }
 
     private Cluster createEcsCluster() {
@@ -107,81 +140,31 @@ public class LocalStack extends Stack
                 .build();
     }
 
-    private FargateService createKafkaService() {
-        Cluster cluster = Cluster.Builder.create(this, "KafkaCluster")
+    private CfnCluster createMskCluster() {
+        SecurityGroup mskSg = SecurityGroup.Builder.create(this, "KafkaSecurityGroup")
                 .vpc(this.vpc)
-                .clusterName("KafkaCluster")
-                .build();
-
-        // Security group allowing Kafka client traffic on 9092 and internal 29092
-        SecurityGroup kafkaSg = SecurityGroup.Builder.create(this, "KafkaSecurityGroup")
-                .vpc(this.vpc)
-                .description("Allow Kafka inbound traffic")
+                .description("Allow Kafka broker access from ECS microservices")
                 .allowAllOutbound(true)
                 .build();
-        kafkaSg.addIngressRule(Peer.ipv4(this.vpc.getVpcCidrBlock()), Port.tcp(9092), "Allow Kafka Plaintext from VPC");
-        kafkaSg.addIngressRule(Peer.ipv4(this.vpc.getVpcCidrBlock()), Port.tcp(29092), "Allow Kafka Internal from VPC");
+        mskSg.addIngressRule(Peer.ipv4(this.vpc.getVpcCidrBlock()), Port.tcp(9092), "Plaintext traffic from VPC");
+        mskSg.addIngressRule(Peer.ipv4(this.vpc.getVpcCidrBlock()), Port.tcp(9094), "TLS traffic from VPC");
 
-        // Task definition (1 vCPU, 2GB RAM is standard for cp-kafka)
-        FargateTaskDefinition taskDefinition = FargateTaskDefinition.Builder.create(this, "KafkaTaskDef")
-                .cpu(1024)
-                .memoryLimitMiB(2048)
-                .build();
+        List<String> privateSubnetIds = this.vpc.getPrivateSubnets().stream()
+                .map(ISubnet::getSubnetId)
+                .toList();
 
-        // Map all compose.yml environment variables
-        Map<String, String> kafkaEnv = Map.ofEntries(
-                Map.entry("KAFKA_NODE_ID", "1"),
-                Map.entry("KAFKA_LISTENER_SECURITY_PROTOCOL_MAP", "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"),
-                Map.entry("KAFKA_ADVERTISED_LISTENERS", "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092"),
-                Map.entry("KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR", "1"),
-                Map.entry("KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS", "0"),
-                Map.entry("KAFKA_TRANSACTION_STATE_LOG_MIN_ISR", "1"),
-                Map.entry("KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR", "1"),
-                Map.entry("KAFKA_PROCESS_ROLES", "broker,controller"),
-                Map.entry("KAFKA_KEY_FORMATED", "1"),
-                Map.entry("KAFKA_CONTROLLER_QUORUM_VOTERS", "1@kafka:29093"),
-                Map.entry("KAFKA_LISTENERS", "PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:29093,PLAINTEXT_HOST://0.0.0.0:9092"),
-                Map.entry("KAFKA_INTER_BROKER_LISTENER_NAME", "PLAINTEXT"),
-                Map.entry("KAFKA_CONTROLLER_LISTENER_NAMES", "CONTROLLER"),
-                Map.entry("KAFKA_LOG_DIRS", "/tmp/kraft-combined-logs"),
-                Map.entry("CLUSTER_ID", "MkU3OEVBNTcwNTJENDM2Qk")
-        );
-
-        taskDefinition.addContainer("KafkaContainer", ContainerDefinitionOptions.builder()
-                .image(ContainerImage.fromRegistry("confluentinc/cp-kafka:7.5.0"))
-                .containerName("kafka")
-                .environment(kafkaEnv)
-                .portMappings(List.of(
-                        PortMapping.builder().containerPort(9092).hostPort(9092).build(),
-                        PortMapping.builder().containerPort(29092).hostPort(29092).build()
-                ))
-                .logging(LogDriver.awsLogs(AwsLogDriverProps.builder().streamPrefix("kafka").build()))
-                .build());
-
-        return FargateService.Builder.create(this, "KafkaFargateService")
-                .cluster(cluster)
-                .taskDefinition(taskDefinition)
-                .securityGroups(List.of(kafkaSg))
-                .vpcSubnets(SubnetSelection.builder().subnetType(SubnetType.PRIVATE_WITH_EGRESS).build())
-                .desiredCount(1)
-                .serviceName("kafka-service")
-                .build();
-    }
-
-    /**
-     * Separate health check method using Route 53 to verify TCP connectivity on Kafka broker port 9092
-     */
-    private CfnHealthCheck createKafkaHealthCheck(FargateService service) {
-        return new CfnHealthCheck(this, "KafkaHealthCheck", CfnHealthCheckProps.builder()
-                .healthCheckConfig(CfnHealthCheck.HealthCheckConfigProperty.builder()
-                        .type("TCP")
-                        .port(9092)
-                        .fullyQualifiedDomainName(service.getServiceName() + ".local")
-                        .requestInterval(10)
-                        .failureThreshold(3)
+        return CfnCluster.Builder.create(this, "MskCluster")
+                .clusterName("PatientManagementMSK")
+                .kafkaVersion("3.5.1")
+                .numberOfBrokerNodes(2)
+                .brokerNodeGroupInfo(CfnCluster.BrokerNodeGroupInfoProperty.builder()
+                        .instanceType("kafka.t3.small")
+                        .clientSubnets(privateSubnetIds)
+                        .securityGroups(List.of(mskSg.getSecurityGroupId()))
                         .build())
-                .build());
+                .build();
     }
+
 
     private CfnHealthCheck createMySqlHealthCheck(DatabaseInstance db) {
         return new CfnHealthCheck(this, "MySqlHealthCheck", CfnHealthCheckProps.builder()
